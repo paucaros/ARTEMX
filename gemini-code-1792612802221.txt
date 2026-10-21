@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArteMX - El Ecosistema Digital del Arte en México</title>
+    
+    <!-- Tipografías: Playfair Display (Elegancia) e Inter (Interfaz limpia) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        art: {
+                            dark: '#0f172a',
+                            accent: '#7c3aed',
+                            accentHover: '#6d28d9',
+                            gold: '#d97706',
+                            bg: '#f8fafc'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-art-bg text-slate-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- Header / Navegación -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div class="container mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+            <!-- Logo ArteMX -->
+            <a href="#" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 bg-art-dark text-white flex items-center justify-center rounded-lg shadow-md">
+                    <i data-lucide="palette" class="w-5 h-5 text-art-accent"></i>
+                </div>
+                <span class="font-serif text-2xl font-bold tracking-tight text-slate-900">Arte<span class="text-art-accent">MX</span></span>
+            </a>
+
+            <!-- Menú Central -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+                <a href="#obras" class="hover:text-art-accent transition-colors">Catálogo de Obras</a>
+                <a href="#soluciones" class="hover:text-art-accent transition-colors">¿Cómo Funciona?</a>
+                <a href="#proveedores" class="hover:text-art-accent transition-colors">Red Logística</a>
+            </nav>
+
+            <!-- Botones de Acción -->
+            <div class="flex items-center gap-3">
+                <button onclick="openModal('artistModal')" class="hidden sm:inline-flex text-xs md:text-sm font-medium text-slate-700 hover:text-art-accent px-3 py-2 transition-colors">
+                    Soy Artista / Galería
+                </button>
+                <a href="#obras" class="bg-art-accent hover:bg-art-accentHover text-white text-xs sm:text-sm font-medium px-4 py-2.5 rounded-full transition-all shadow-md hover:shadow-art-accent/20 flex items-center gap-1.5">
+                    <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                    Explorar Obras
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner Informativo de Propuesta de Valor Local -->
+    <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 text-center flex items-center justify-center gap-4 flex-wrap border-b border-slate-800">
+        <span>✨ Precios en **MXN** transparentes sin "DM para precio"</span>
+        <span class="hidden md:inline">•</span>
+        <span>📦 Envíos locales asegurados con guías especializadas</span>
+        <span class="hidden md:inline">•</span>
+        <span>🧾 Facturación CFDI (SAT) inmediata para interioristas</span>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="py-16 lg:py-24 px-4 sm:px-6 max-w-6xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-art-accent/10 border border-art-accent/20 text-art-accent text-xs font-semibold mb-6">
+            <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Plataforma Directa de Arte Mexicano
+        </div>
+        <h1 class="font-serif text-4xl sm:text-6xl font-bold text-slate-900 leading-tight mb-6">
+            Conectamos el talento visual de México con <span class="text-art-accent italic">compradores y logística local</span>.
+        </h1>
+        <p class="text-slate-600 text-base sm:text-lg max-w-3xl mx-auto mb-8 leading-relaxed">
+            Eliminamos las comisiones excesivas de galerías (40-50%) y resolvemos la logística costosa. Compra arte autenticado con precio total claro o vende tus obras conservando el 88% de tu ganancia.
+        </p>
+
+        <!-- Métricas Rápidas / Beneficios -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-4 text-left">
+            <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
+                <p class="text-xs text-slate-500 font-medium">Comisión para Artistas</p>
+                <p class="text-xl font-bold text-slate-900">10% - 12% <span class="text-xs font-normal text-green-600">(vs 50% trad.)</span></p>
+            </div>
+            <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
+                <p class="text-xs text-slate-500 font-medium">Pagos y Facturas</p>
+                <p class="text-xl font-bold text-slate-900">SPEI / CFDI SAT</p>
+            </div>
+            <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
+                <p class="text-xs text-slate-500 font-medium">Logística Especial</p>
+                <p class="text-xl font-bold text-slate-900">Flete + Seguro</p>
+            </div>
+            <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
+                <p class="text-xs text-slate-500 font-medium">Autenticidad</p>
+                <p class="text-xl font-bold text-slate-900">Certificado COA</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catálogo de Obras (Simulación de MVP para Compradores) -->
+    <section id="obras" class="py-12 bg-white border-t border-slate-200 flex-grow">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                <div>
+                    <h2 class="font-serif text-3xl font-bold text-slate-900">Obras Disponibles</h2>
+                    <p class="text-slate-500 text-sm mt-1">Precios finales en MXN con certificado y seguro de traslado incluido.</p>
+                </div>
+                <!-- Filtros -->
+                <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
+                    <button onclick="filterArt('all')" class="filter-btn active bg-slate-900 text-white text-xs px-4 py-2 rounded-full transition-all">Todas</button>
+                    <button onclick="filterArt('pintura')" class="filter-btn bg-slate-100 text-slate-700 hover:bg-slate-200 text-xs px-4 py-2 rounded-full transition-all">Pintura</button>
+                    <button onclick="filterArt('escultura')" class="filter-btn bg-slate-100 text-slate-700 hover:bg-slate-200 text-xs px-4 py-2 rounded-full transition-all">Escultura / Objetos</button>
+                    <button onclick="filterArt('fotografia')" class="filter-btn bg-slate-100 text-slate-700 hover:bg-slate-200 text-xs px-4 py-2 rounded-full transition-all">Fotografía</button>
+                </div>
+            </div>
+
+            <!-- Grilla de Productos de Arte -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="artGrid">
+                
+                <!-- Obra 1 -->
+                <div class="art-card group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl transition-all duration-300" data-category="pintura">
+                    <div class="relative aspect-4/3 bg-slate-200 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80" alt="Obra de arte" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-slate-800 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md">Oleo sobre Lienzo</span>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h3 class="font-serif text-xl font-bold text-slate-900">Ecos de la Periferia</h3>
+                                <p class="text-xs text-slate-500">Por **Camila Casarrubias** (CDMX)</p>
+                            </div>
+                            <span class="text-xs bg-green-100 text-green-800 font-semibold px-2 py-0.5 rounded">En Stock</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-4 line-clamp-2">Dimensiones: 100 x 120 cm. Incluye bastidor reforzado e inspección previa.</p>
+                        <div class="pt-3 border-t border-slate-200 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] text-slate-400 block uppercase font-medium">Precio Transparente</span>
+                                <span class="text-lg font-bold text-slate-900">$18,500 MXN</span>
+                            </div>
+                            <button onclick="openBuyModal('Ecos de la Periferia', 'Camila Casarrubias', 18500, 1200)" class="bg-art-dark hover:bg-art-accent text-white text-xs px-4 py-2.5 rounded-lg font-medium transition-colors flex items-center gap-1.5">
+                                Ver Desglose / Comprar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Obra 2 -->
+                <div class="art-card group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl transition-all duration-300" data-category="escultura">
+                    <div class="relative aspect-4/3 bg-slate-200 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80" alt="Escultura de Arte" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-slate-800 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md">Cerámica / Escultura</span>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h3 class="font-serif text-xl font-bold text-slate-900">Tierra Recuperada N.4</h3>
+                                <p class="text-xs text-slate-500">Por **Pablo Pimentel** (Oaxaca)</p>
+                            </div>
+                            <span class="text-xs bg-amber-100 text-amber-800 font-semibold px-2 py-0.5 rounded">Pieza Única</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-4 line-clamp-2">Pieza de 14kg. Requiere huacal de madera y flete especializado con rampa.</p>
+                        <div class="pt-3 border-t border-slate-200 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] text-slate-400 block uppercase font-medium">Precio Transparente</span>
+                                <span class="text-lg font-bold text-slate-900">$24,000 MXN</span>
+                            </div>
+                            <button onclick="openBuyModal('Tierra Recuperada N.4', 'Pablo Pimentel', 24000, 2500)" class="bg-art-dark hover:bg-art-accent text-white text-xs px-4 py-2.5 rounded-lg font-medium transition-colors flex items-center gap-1.5">
+                                Ver Desglose / Comprar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Obra 3 -->
+                <div class="art-card group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl transition-all duration-300" data-category="fotografia">
+                    <div class="relative aspect-4/3 bg-slate-200 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=800&q=80" alt="Fotografia de Arte" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-slate-800 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md">Fotografía Fine Art</span>
+                    </div>
+                    <p class="sr-only">Edición limitada</p>
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h3 class="font-serif text-xl font-bold text-slate-900">Horizontes de Sal</h3>
+                                <p class="text-xs text-slate-500">Por **Annya Leal** (Yucatán)</p>
+                            </div>
+                            <span class="text-xs bg-blue-100 text-blue-800 font-semibold px-2 py-0.5 rounded">Edición 3/10</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-4 line-clamp-2">Impresión en papel de algodón. Incluye enmarcado acrílico de grado museo.</p>
+                        <div class="pt-3 border-t border-slate-200 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] text-slate-400 block uppercase font-medium">Precio Transparente</span>
+                                <span class="text-lg font-bold text-slate-900">$12,800 MXN</span>
+                            </div>
+                            <button onclick="openBuyModal('Horizontes de Sal', 'Annya Leal', 12800, 950)" class="bg-art-dark hover:bg-art-accent text-white text-xs px-4 py-2.5 rounded-lg font-medium transition-colors flex items-center gap-1.5">
+                                Ver Desglose / Comprar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Registro de Artistas y Proveedores -->
+    <section id="soluciones" class="py-16 bg-slate-900 text-white">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-xs font-bold text-art-accent uppercase tracking-wider">Un ecosistema justo</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold mt-2 mb-4">¿Pintas, esculpes o gestionas logística de arte?</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        ArteMX fue diseñado tras entrevistar a decenas de creadores e interioristas en México. Resolvemos los tres grandes dolores del sector:
+                    </p>
+                    <ul class="space-y-3 text-sm text-slate-300 mb-8">
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400 shrink-0 mt-0.5"></i>
+                            <span>**Conserva el 88% de tu venta:** Cero suscripciones mensuales obligatorias. Sin comisiones abusivas del 50%.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400 shrink-0 mt-0.5"></i>
+                            <span>**Logística sin estrés:** Nosotros conectamos con transportistas especializados en embalaje de obras.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400 shrink-0 mt-0.5"></i>
+                            <span>**Facturación para corporativos:** Vende a despachos de arquitectura emitiendo CFDI sin complicaciones.</span>
+                        </li>
+                    </ul>
+                    <button onclick="openModal('artistModal')" class="bg-art-accent hover:bg-art-accentHover text-white text-sm font-semibold px-6 py-3 rounded-xl transition-all">
+                        Registrarme como Artista / Proveedor
+                    </button>
+                </div>
+
+                <div class="bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-700">
+                    <h3 class="font-serif text-xl font-bold mb-4">Simulador de Cobro para Artistas</h3>
+                    <p class="text-xs text-slate-400 mb-6">Comprueba cuánto recibirías en tu cuenta bancaria por la venta de tu obra:</p>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-300 mb-1">Precio de lista de tu obra (MXN)</label>
+                            <input type="number" id="artistPriceInput" value="15000" oninput="calculateCommission()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-art-accent">
+                        </div>
+                        
+                        <div class="p-4 bg-slate-900/60 rounded-xl space-y-2 text-xs border border-slate-700/50">
+                            <div class="flex justify-between text-slate-400">
+                                <span>Comisión ArteMX (12%):</span>
+                                <span id="commissionVal" class="text-rose-400">-$1,800 MXN</span>
+                            </div>
+                            <div class="flex justify-between text-slate-400">
+                                <span>Costo por procesamiento de pago SPEI/Tarjeta:</span>
+                                <span class="text-slate-300">$0 MXN (Absorbido)</span>
+                            </div>
+                            <div class="pt-2 border-t border-slate-700 flex justify-between font-bold text-sm text-white">
+                                <span>Tu Depósito Directo:</span>
+                                <span id="artistPayoutVal" class="text-green-400">$13,200 MXN</span>
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-slate-500 italic">* En galerías físicas recibirías únicamente $7,500 MXN por esta misma obra.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-8 text-xs text-slate-500">
+        <div class="container mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2 font-serif font-bold text-slate-900 text-base">
+                <i data-lucide="palette" class="w-4 h-4 text-art-accent"></i> ArteMX
+            </div>
+            <p>© 2026 ArteMX - Proyecto MVP de Validación. Desarrollado por Equipo 2.</p>
+            <div class="flex gap-4">
+                <a href="#" class="hover:text-art-accent">Términos</a>
+                <a href="#" class="hover:text-art-accent">Privacidad</a>
+                <a href="#" class="hover:text-art-accent">SAT / CFDI</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL 1: PROCESO DE COMPRA TRANSPARENTE -->
+    <div id="buyModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('buyModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            
+            <div class="flex items-center gap-2 text-art-accent text-xs font-bold uppercase tracking-wider mb-1">
+                <i data-lucide="shield-check" class="w-4 h-4"></i> Compra Directa Segura
+            </div>
+            <h3 id="modalArtworkTitle" class="font-serif text-2xl font-bold text-slate-900">Nombre de la Obra</h3>
+            <p id="modalArtistName" class="text-xs text-slate-500 mb-4">Artista</p>
+
+            <!-- Desglose de Precio Transparente -->
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-6 space-y-2 text-xs">
+                <div class="flex justify-between text-slate-600">
+                    <span>Precio de la obra:</span>
+                    <span id="modalArtworkPrice" class="font-semibold">$0 MXN</span>
+                </div>
+                <div class="flex justify-between text-slate-600">
+                    <span>Envío Asegurado + Empaque especial:</span>
+                    <span id="modalFreightPrice" class="font-semibold">$0 MXN</span>
+                </div>
+                <div class="flex justify-between text-slate-600">
+                    <span>Certificado Digital de Autenticidad (COA):</span>
+                    <span class="text-green-600 font-semibold">Incluido ($0)</span>
+                </div>
+                <div class="pt-2 border-t border-slate-200 flex justify-between text-sm font-bold text-slate-900">
+                    <span>Total Transparente:</span>
+                    <span id="modalTotalPrice" class="text-art-accent">$0 MXN</span>
+                </div>
+            </div>
+
+            <!-- Formulario de Checkout Validativo -->
+            <form onsubmit="handlePurchaseSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-700 mb-1">Tu Nombre Completo</label>
+                    <input type="text" required placeholder="Ej. Alejandro Reyna" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-art-accent">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Correo Electrónico</label>
+                        <input type="email" required placeholder="correo@ejemplo.com" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-art-accent">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Ciudad de Entrega</label>
+                        <input type="text" required placeholder="Ej. Monterrey / CDMX" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-art-accent">
+                    </div>
+                </div>
+
+                <!-- Requerimiento del hallazgo: Facturación CFDI -->
+                <div class="pt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" id="cfdiCheck" class="rounded text-art-accent focus:ring-art-accent">
+                        <span class="text-xs font-medium text-slate-700">Requiero factura fiscal (CFDI - SAT México)</span>
+                    </label>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full bg-art-accent hover:bg-art-accentHover text-white text-sm font-bold py-3 rounded-xl transition-all shadow-md">
+                        Proceder a Simulación de Pago (SPEI / Tarjeta)
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: REGISTRO DE ARTISTAS O PROVEEDORES -->
+    <div id="artistModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('artistModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <h3 class="font-serif text-2xl font-bold text-slate-900 mb-1">Únete a ArteMX</h3>
+            <p class="text-xs text-slate-500 mb-6">Registra tus datos para subir obras o vender servicios de logística.</p>
+
+            <form onsubmit="handleArtistSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-700 mb-1">¿Cuál es tu rol principal?</label>
+                    <select required class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-art-accent">
+                        <option value="artista">Artista Visual Independiente</option>
+                        <option value="galeria">Galería / Colectivo</option>
+                        <option value="proveedor">Proveedor Logístico / Enmarcado</option>
+                        <option value="interiorista">Interiorista / Comprador Frecuente</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-700 mb-1">Nombre Completo o Razón Social</label>
+                    <input type="text" required placeholder="Ej. Frida Castillo" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-art-accent">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Teléfono (WhatsApp)</label>
+                        <input type="tel" required placeholder="55 1234 5678" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-art-accent">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Estado / Ciudad</label>
+                        <input type="text" required placeholder="Ej. Guadalajara" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-art-accent">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-700 mb-1">Enlace a Portafolio o Instagram (Opcional)</label>
+                    <input type="url" placeholder="https://instagram.com/tu_arte" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-art-accent">
+                </div>
+
+                <button type="submit" class="w-full bg-slate-900 hover:bg-art-accent text-white text-sm font-bold py-3 rounded-xl transition-all shadow-md">
+                    Enviar Solicitud de Registro
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT Y LÓGICA INTERACTIVA -->
+    <script>
+        // Inicializar Iconos Lucide
+        lucide.createIcons();
+
+        // Control de Modales
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Modal de Compra con Desglose
+        function openBuyModal(title, artist, price, freight) {
+            document.getElementById('modalArtworkTitle').innerText = title;
+            document.getElementById('modalArtistName').innerText = "Por " + artist;
+            document.getElementById('modalArtworkPrice').innerText = "$" + price.toLocaleString() + " MXN";
+            document.getElementById('modalFreightPrice').innerText = "$" + freight.toLocaleString() + " MXN";
+            document.getElementById('modalTotalPrice').innerText = "$" + (price + freight).toLocaleString() + " MXN";
+            
+            openModal('buyModal');
+        }
+
+        // Filtro de Obras
+        function filterArt(category) {
+            const cards = document.querySelectorAll('.art-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => btn.classList.remove('bg-slate-900', 'text-white'));
+            buttons.forEach(btn => btn.classList.add('bg-slate-100', 'text-slate-700'));
+
+            event.target.classList.remove('bg-slate-100', 'text-slate-700');
+            event.target.classList.add('bg-slate-900', 'text-white');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Calculadora para Artistas
+        function calculateCommission() {
+            const price = parseFloat(document.getElementById('artistPriceInput').value) || 0;
+            const commission = price * 0.12;
+            const payout = price - commission;
+
+            document.getElementById('commissionVal').innerText = "-$" + Math.round(commission).toLocaleString() + " MXN";
+            document.getElementById('artistPayoutVal').innerText = "$" + Math.round(payout).toLocaleString() + " MXN";
+        }
+
+        // Handlers de Formulario (Validación de Experimento)
+        function handlePurchaseSubmit(e) {
+            e.preventDefault();
+            const hasCFDI = document.getElementById('cfdiCheck').checked;
+            alert("¡Gracias por probar el MVP de ArteMX!\n\nHas validado el flujo de compra directo. " + (hasCFDI ? "Se ha marcado tu requerimiento de factura CFDI." : "") + "\n\nEsta solicitud ha sido registrada para el análisis de tracción de nuestro equipo.");
+            closeModal('buyModal');
+        }
+
+        function handleArtistSubmit(e) {
+            e.preventDefault();
+            alert("¡Solicitud recibida correctamente!\n\nTu registro ha sido almacenado en la base de validación de ArteMX. Te contactaremos vía WhatsApp para completar la verificación de tu portafolio.");
+            closeModal('artistModal');
+        }
+    </script>
+</body>
+</html>
